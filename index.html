@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7efe2">
+  <meta name="description" content="测测你是哪种小猫：用 15 道猫咪习性类比的生活情境题，探索你的能量节奏、社交距离与探索半径。原创自评，不构成专业诊断。">
+  <title>测测你是哪种小猫 · 猫格研究所</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="svg-library" aria-hidden="true">
+    <symbol id="icon-paw" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="15.4" rx="5.2" ry="4.2" fill="currentColor"/>
+      <ellipse cx="5.2" cy="10.7" rx="2.2" ry="2.8" transform="rotate(-24 5.2 10.7)" fill="currentColor"/>
+      <ellipse cx="9.2" cy="6.1" rx="2.2" ry="2.9" transform="rotate(-8 9.2 6.1)" fill="currentColor"/>
+      <ellipse cx="14.8" cy="6.1" rx="2.2" ry="2.9" transform="rotate(8 14.8 6.1)" fill="currentColor"/>
+      <ellipse cx="18.8" cy="10.7" rx="2.2" ry="2.8" transform="rotate(24 18.8 10.7)" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+      <path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24">
+      <path d="M12 2.8c.55 5.2 3.95 8.65 9.2 9.2-5.25.55-8.65 4-9.2 9.2-.55-5.2-3.95-8.65-9.2-9.2 5.25-.55 8.65-4 9.2-9.2Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-cat-head" viewBox="0 0 64 64">
+      <path d="M12 20 16 7l13 7h6l13-7 4 13c3.5 4.2 5 9 5 14 0 13-9.7 23-25 23S7 47 7 34c0-5 1.5-9.8 5-14Z" fill="currentColor"/>
+      <path d="M21 34c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3Zm22 0c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3Z" fill="#2f251f"/>
+      <path d="M29 43c2-1.7 4-1.7 6 0" fill="none" stroke="#2f251f" stroke-width="2.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path d="m5 12.5 4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-copy" viewBox="0 0 24 24">
+      <rect x="8" y="8" width="11" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-refresh" viewBox="0 0 24 24">
+      <path d="M20 8a8 8 0 1 0 .2 7.5M20 4v4h-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <div class="site-grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#home" data-go-home aria-label="猫格研究所首页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M8 14 10.5 5 19 9h2l8.5-4L32 14c2 2.5 3 5.4 3 8.3C35 30 28.8 36 20 36S5 30 5 22.3C5 19.4 6 16.5 8 14Z" fill="currentColor"/><circle cx="14.5" cy="22" r="1.8" fill="#fff8ed"/><circle cx="25.5" cy="22" r="1.8" fill="#fff8ed"/><path d="M18 27c1.2-1 2.8-1 4 0" fill="none" stroke="#fff8ed" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand-copy"><strong>猫格研究所</strong><small>CAT PERSONALITY LAB</small></span>
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="#how-it-works" data-home-link>怎么测</a>
+      <a href="#types" data-home-link>猫格图鉴</a>
+    </nav>
+    <div class="header-actions">
+      <button class="button button-small button-ink" id="headerStart" type="button">开始测试</button>
+      <button class="button button-small button-ghost" id="headerExit" type="button" hidden>保存并退出</button>
+      <button class="button button-small button-ghost" id="headerRetake" type="button" hidden>重新测试</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <section class="view home-view is-active" id="view-home" aria-labelledby="homeTitle">
+      <div class="hero wrap">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span class="eyebrow-dot"></span>原创猫格自评 · 约 3 分钟</div>
+          <h1 id="homeTitle">测测你是<br><span class="title-mark">哪种小猫<svg viewBox="0 0 290 18" aria-hidden="true"><path d="M3 12C67 3 169 4 286 9" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></svg></span></h1>
+          <p class="hero-lead">如果性格也有尾巴，它会朝哪边翘？<br>用 15 个生活里的小瞬间，看看你的猫系能量。</p>
+          <div class="hero-actions">
+            <button class="button button-primary button-large" id="startQuiz" type="button">
+              <span>开始探索</span>
+              <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
+            </button>
+            <a class="text-link" href="#how-it-works">先看测评说明 <span>↓</span></a>
+          </div>
+          <div class="hero-facts" aria-label="测评信息">
+            <span><svg><use href="#icon-check"></use></svg>15 道情境题</span>
+            <span><svg><use href="#icon-check"></use></svg>8 种猫格</span>
+            <span><svg><use href="#icon-check"></use></svg>不判定好坏</span>
+          </div>
+          <p class="micro-note">依据最近 3 个月的你作答，不用想“应该成为谁”。</p>
+        </div>
+
+        <div class="hero-visual reveal reveal-delay" aria-label="一只坐在窗台上的橘白小猫原创插画">
+          <div class="hero-orbit orbit-one" aria-hidden="true"></div>
+          <div class="hero-orbit orbit-two" aria-hidden="true"></div>
+          <div class="art-label art-label-top"><svg><use href="#icon-spark"></use></svg><span>好奇心正在加载</span></div>
+          <div class="art-label art-label-bottom"><strong>98%</strong><span>今日份可爱</span></div>
+          <svg class="hero-cat" viewBox="0 0 620 650" role="img" aria-labelledby="heroCatTitle heroCatDesc">
+            <title id="heroCatTitle">窗台上的橘白小猫</title>
+            <desc id="heroCatDesc">一只橘白小猫坐在有太阳和绿植的拱形窗台前，旁边有一团毛线。</desc>
+            <defs>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f8c878"/>
+                <stop offset="1" stop-color="#f7e3b6"/>
+              </linearGradient>
+              <linearGradient id="catOrange" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#e87545"/>
+                <stop offset="1" stop-color="#d95b35"/>
+              </linearGradient>
+              <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="14" stdDeviation="15" flood-color="#70442e" flood-opacity=".16"/>
+              </filter>
+            </defs>
+            <path d="M112 540c21-77 90-109 205-109 121 0 189 34 215 109Z" fill="#e8ddc9" opacity=".55"/>
+            <circle cx="457" cy="120" r="40" fill="#fff4d6" opacity=".88"/>
+            <path d="M121 274c14-124 86-189 196-189 116 0 189 68 199 189v212H121Z" fill="url(#skyGrad)"/>
+            <path d="M142 271c11-105 75-162 175-162 101 0 165 58 175 162v192H142Z" fill="#fff8e9"/>
+            <path d="M142 363h350v100H142Z" fill="#f3e8d5"/>
+            <path d="M309 109v254" stroke="#eadac0" stroke-width="5" opacity=".55"/>
+            <path d="M142 308h350" stroke="#eadac0" stroke-width="5" opacity=".55"/>
+            <path d="M437 74c-8 18-8 31 2 45 11 16 12 32 3 49" fill="none" stroke="#f6bd69" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+            <g filter="url(#softShadow)">
+              <path d="M310 452c-74 0-131 34-152 103h318c-15-69-76-103-166-103Z" fill="url(#catOrange)"/>
+              <path d="M331 343c-49 0-91 32-105 82l-16 85c31 30 77 44 122 44 47 0 91-16 122-45l-15-80c-13-52-57-86-108-86Z" fill="url(#catOrange)"/>
+              <path d="M253 211c6-47 33-70 77-70 45 0 74 24 81 72l-4 82c-5 47-35 76-78 76-44 0-73-30-78-78Z" fill="#dd643b"/>
+              <path d="M259 184 234 103c-2-10 8-17 16-11l66 48Z" fill="#dd643b"/>
+              <path d="M407 184 434 103c3-10-7-18-16-12l-67 49Z" fill="#dd643b"/>
+              <path d="M266 170 247 116l44 32Z" fill="#f5c2a5"/>
+              <path d="M402 170 421 116l-43 32Z" fill="#f5c2a5"/>
+              <path d="M302 327c10 19 26 29 48 29 23 0 39-10 49-29-14-16-30-24-49-24-20 0-36 8-48 24Z" fill="#fff2dc"/>
+              <path d="M282 244c11-11 25-11 36 0-11 10-25 10-36 0Zm76 0c11-11 25-11 36 0-11 10-25 10-36 0Z" fill="#33231c"/>
+              <path d="M330 272c8-5 15-5 23 0-6 6-17 6-23 0Z" fill="#e99983"/>
+              <path d="M340 276v7m0 0c-7 7-14 8-21 4m21-4c7 7 14 8 21 4" fill="none" stroke="#6c3f30" stroke-width="3" stroke-linecap="round"/>
+              <path d="m329 255 11 17m11-17-11 17" stroke="#6c3f30" stroke-width="3" stroke-linecap="round"/>
+              <path d="M272 280h-53m53 13-51 7m163-20h53m-53 13 51 7" stroke="#ffd8b6" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+              <path d="M270 373c10 19 25 28 43 28 6 0 12-1 17-3" fill="none" stroke="#b9492b" stroke-width="8" stroke-linecap="round" opacity=".6"/>
+              <path d="M413 374c-8 24-25 38-47 42" fill="none" stroke="#b9492b" stroke-width="8" stroke-linecap="round" opacity=".6"/>
+              <path d="M218 522c-27 13-63 6-79-25-15-29 1-60 31-67-5-31 29-54 55-37 21 14 24 38 17 56-8 20-23 29-41 23 2 17-1 32-13 44" fill="none" stroke="#d95b35" stroke-width="28" stroke-linecap="round"/>
+              <path d="M326 493h12m9 0h12m9 0h12m9 0h12" stroke="#f4b090" stroke-width="4" stroke-linecap="round"/>
+              <ellipse cx="261" cy="514" rx="34" ry="23" fill="#fff2dc"/>
+              <ellipse cx="399" cy="514" rx="34" ry="23" fill="#fff2dc"/>
+            </g>
+            <path d="M111 486h398v18H111Z" fill="#c9aa82"/>
+            <path d="M92 503h436v17H92Z" fill="#b18e68"/>
+            <g transform="translate(416 437)">
+              <circle cx="45" cy="45" r="38" fill="#88a794"/>
+              <path d="M20 21c26 7 43 27 51 55M13 47c22-6 42 1 59 18M33 11c18 12 29 29 34 50" fill="none" stroke="#f4ddad" stroke-width="4" stroke-linecap="round"/>
+              <path d="M52 82c17 15 33 7 38-7" fill="none" stroke="#657e70" stroke-width="4" stroke-linecap="round"/>
+            </g>
+            <g transform="translate(442 525)" fill="none" stroke-linecap="round">
+              <path d="M12 20h68c12 0 15 17 4 22l-60 31c-12 6-19 19-11 29 6 8 18 10 26 4" stroke="#d37658" stroke-width="7"/>
+              <path d="M72 31c16 8 23 23 15 37-7 13-23 17-35 8-11-8-13-23-5-34 6-8 16-12 25-11Z" stroke="#d37658" stroke-width="7"/>
+            </g>
+            <g transform="translate(216 449)" fill="none" stroke="#88a794" stroke-linecap="round">
+              <path d="M32 88V21" stroke-width="6"/>
+              <path d="M32 52c-18-6-31-16-38-31 22-3 36 6 43 22M32 36C43 18 58 11 77 13c-5 23-20 33-45 30" stroke-width="5"/>
+            </g>
+            <path d="M182 434h60l-8 78h-44Z" fill="#ca8d65"/>
+            <path d="M192 434c1-18 10-27 22-27s20 9 21 27" fill="none" stroke="#ca8d65" stroke-width="8"/>
+            <g fill="#d65e3b" opacity=".7">
+              <path d="M183 91c7 8 9 15 6 23-7-6-9-13-6-23Z"/>
+              <path d="M453 82c-7 8-9 15-6 23 7-6 9-13 6-23Z"/>
+              <path d="M487 197c9 1 16 6 20 14-9 1-16-4-20-14Z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>15 道日常情境题</span><svg><use href="#icon-paw"></use></svg>
+          <span>3 个猫系能量维度</span><svg><use href="#icon-paw"></use></svg>
+          <span>8 种猫格结果</span><svg><use href="#icon-paw"></use></svg>
+          <span>没有标准答案</span><svg><use href="#icon-paw"></use></svg>
+          <span>15 道日常情境题</span><svg><use href="#icon-paw"></use></svg>
+          <span>3 个猫系能量维度</span><svg><use href="#icon-paw"></use></svg>
+          <span>8 种猫格结果</span><svg><use href="#icon-paw"></use></svg>
+          <span>没有标准答案</span><svg><use href="#icon-paw"></use></svg>
+        </div>
+      </div>
+
+      <section class="section how-section wrap" id="how-it-works" aria-labelledby="howTitle">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">HOW IT WORKS</p>
+            <h2 id="howTitle">不是给你贴标签，<br>是递给你一面猫镜子。</h2>
+          </div>
+          <p class="section-intro">猫不会按“好猫”或“坏猫”生活。你也不需要。这里的每个结果，只描述你更自然的能量使用方式。</p>
+        </div>
+        <div class="dimension-grid">
+          <article class="dimension-card energy-card">
+            <div class="dimension-top"><span class="dimension-index">01</span><span class="dimension-icon">☀</span></div>
+            <h3>能量节奏</h3>
+            <p>你是被新鲜事瞬间点亮的“蹦跳派”，还是擅长省电与享受的“慵懒派”？</p>
+            <div class="pole-line"><span>蹦跳</span><i></i><span>慵懒</span></div>
+          </article>
+          <article class="dimension-card social-card">
+            <div class="dimension-top"><span class="dimension-index">02</span><span class="dimension-icon">♡</span></div>
+            <h3>社交距离</h3>
+            <p>互动和被回应会给你充电，还是独处与清晰边界更让你松一口气？</p>
+            <div class="pole-line"><span>贴贴</span><i></i><span>独处</span></div>
+          </article>
+          <article class="dimension-card explore-card">
+            <div class="dimension-top"><span class="dimension-index">03</span><span class="dimension-icon">✦</span></div>
+            <h3>探索半径</h3>
+            <p>未知像一扇想推开的门，还是熟悉的角落更能让你安心投入？</p>
+            <div class="pole-line"><span>探险</span><i></i><span>守家</span></div>
+          </article>
+        </div>
+        <div class="method-panel">
+          <div class="method-steps">
+            <div class="method-step"><span>1</span><p><strong>选最像你的</strong>不用挑“更好”的答案，选择最近 3 个月最常出现的反应。</p></div>
+            <div class="method-step"><span>2</span><p><strong>形成三个倾向</strong>15 题均匀覆盖 3 个维度，每题选择会给对应两端加权。</p></div>
+            <div class="method-step"><span>3</span><p><strong>得到组合猫格</strong>三个倾向拼成 8 种类型之一，并附上可执行的行动建议。</p></div>
+          </div>
+          <aside class="score-note">
+            <svg><use href="#icon-spark"></use></svg>
+            <div><strong>计分说明</strong><p>每维度 5 题，单题按选择强度记 <b>+2 / +1 / -1 / -2</b>。总分决定该维度倾向；恰好同分时，归入更省电的一端。分数只代表偏好，不代表能力高低。</p></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section types-section" id="types" aria-labelledby="typesTitle">
+        <div class="wrap">
+          <div class="section-heading compact">
+            <div><p class="section-kicker">THE EIGHT CATS</p><h2 id="typesTitle">八种猫格，等你认领。</h2></div>
+            <p class="section-intro">不是星座，也不是判决书。只是三种能量倾向组合出的，八种很不一样的可爱。</p>
+          </div>
+          <div class="type-grid">
+            <article class="type-preview" style="--cat:#d96b42;--wash:#f8d4b9"><svg><use href="#icon-cat-head"></use></svg><div><h3>橘汽水猫</h3><p>热情 × 探索</p></div></article>
+            <article class="type-preview" style="--cat:#c89566;--wash:#f4dfc5"><svg><use href="#icon-cat-head"></use></svg><div><h3>奶糖迎宾猫</h3><p>温暖 × 稳定</p></div></article>
+            <article class="type-preview" style="--cat:#403a43;--wash:#ded8df"><svg><use href="#icon-cat-head"></use></svg><div><h3>夜巡黑猫</h3><p>独立 × 探索</p></div></article>
+            <article class="type-preview" style="--cat:#e1834e;--wash:#f9dfc5"><svg><use href="#icon-cat-head"></use></svg><div><h3>橘猫工程师</h3><p>行动 × 秩序</p></div></article>
+            <article class="type-preview" style="--cat:#a8b7c4;--wash:#e2eaef"><svg><use href="#icon-cat-head"></use></svg><div><h3>云端布偶猫</h3><p>柔和 × 灵感</p></div></article>
+            <article class="type-preview" style="--cat:#d7b39e;--wash:#f4e5dd"><svg><use href="#icon-cat-head"></use></svg><div><h3>奶油贴贴猫</h3><p>陪伴 × 安心</p></div></article>
+            <article class="type-preview" style="--cat:#8a8b8d;--wash:#e2e1dd"><svg><use href="#icon-cat-head"></use></svg><div><h3>窗边灰猫</h3><p>安静 × 观察</p></div></article>
+            <article class="type-preview" style="--cat:#98745b;--wash:#ead9ca"><svg><use href="#icon-cat-head"></use></svg><div><h3>毛毯团子猫</h3><p>松弛 × 宅家</p></div></article>
+          </div>
+          <div class="types-cta"><p>想知道自己会把哪只小猫带回家？</p><button class="button button-primary" id="startQuizInline" type="button">去测一测 <svg><use href="#icon-arrow"></use></svg></button></div>
+        </div>
+      </section>
+
+      <section class="ethics-strip wrap" aria-label="测评声明">
+        <svg><use href="#icon-paw"></use></svg>
+        <p><strong>温柔提醒：</strong>本测评为原创娱乐型自我探索工具，不是心理测验，也不构成心理诊断、医疗建议或职业建议。结果没有好坏，也不定义你。</p>
+      </section>
+    </section>
+
+    <section class="view quiz-view" id="view-quiz" aria-labelledby="quizTitle" hidden>
+      <div class="quiz-topbar wrap">
+        <div class="quiz-title-wrap">
+          <p class="section-kicker">CAT ENERGY CHECK</p>
+          <h1 id="quizTitle">正在寻找你的猫猫频率</h1>
+        </div>
+        <div class="quiz-progress-summary">
+          <span>已完成 <strong id="quizAnsweredCount">0 / 15</strong></span>
+          <span class="save-indicator"><i></i>自动保存到本机</span>
+        </div>
+        <div class="quiz-progress-track" role="progressbar" aria-label="答题进度" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0" id="quizProgressTrack"><span id="quizProgressFill"></span></div>
+      </div>
+
+      <div class="quiz-shell wrap">
+        <div class="quiz-layout">
+          <article class="question-card" id="questionCard" aria-live="polite">
+            <div class="question-meta">
+              <span class="question-count">第 <strong id="currentNumber">01</strong> 题</span>
+              <span class="dimension-pill" id="questionDimension">能量节奏</span>
+              <span class="question-of">共 15 题</span>
+            </div>
+            <div class="question-copy">
+              <h2 id="questionText" tabindex="-1">周末早上醒来，窗外阳光很好，你更像？</h2>
+              <p id="questionHint">选一个最近最常出现的反应，不用想“应该怎样”。</p>
+            </div>
+            <div class="option-list" id="optionList" role="radiogroup" aria-labelledby="questionText"></div>
+            <div class="inline-alert" id="quizAlert" role="alert" hidden>
+              <svg><use href="#icon-paw"></use></svg>
+              <span id="quizAlertText">先选一个最像你的答案，再继续。</span>
+            </div>
+            <div class="quiz-navigation">
+              <button class="button button-ghost quiz-back" id="quizBack" type="button">← 上一题</button>
+              <div class="keyboard-hint">可按 <kbd>1</kbd>–<kbd>4</kbd> 选择</div>
+              <button class="button button-primary quiz-next" id="quizNext" type="button"><span>下一题</span><svg><use href="#icon-arrow"></use></svg></button>
+            </div>
+          </article>
+
+          <aside class="quiz-aside" aria-label="答题导航">
+            <div class="aside-card progress-card">
+              <div class="progress-dial" id="progressDial" style="--progress:0deg">
+                <div><strong id="dialPercent">0%</strong><span>探索进度</span></div>
+              </div>
+              <p id="progressMessage">每个真实的选择，<br>都在拼出你的猫格地图。</p>
+            </div>
+            <div class="aside-card map-card">
+              <div class="aside-heading"><strong>题目导航</strong><span id="mapCounter">0 / 15</span></div>
+              <div class="question-map" id="questionMap" aria-label="跳转到某一题"></div>
+              <div class="map-legend"><span><i class="answered"></i>已答</span><span><i class="current"></i>当前</span><span><i></i>未答</span></div>
+            </div>
+            <button class="aside-link" id="quizHomeLink" type="button">← 返回首页，稍后继续</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="view result-view" id="view-result" aria-labelledby="resultTitle" hidden>
+      <div class="result-hero" id="resultHero">
+        <div class="result-hero-inner wrap">
+          <div class="result-copy reveal">
+            <p class="result-kicker"><span>你的猫格档案</span><b id="resultCode">HON</b></p>
+            <h1 id="resultTitle">日光探险家</h1>
+            <p class="result-cat-name" id="resultCatName">橘汽水猫</p>
+            <p class="result-tagline" id="resultTagline">好奇心负责开门，热情负责把大家叫进来。</p>
+            <div class="result-keywords" id="resultKeywords"></div>
+            <p class="result-intro" id="resultIntro"></p>
+            <div class="result-actions">
+              <button class="button button-ink" id="copyResult" type="button"><svg><use href="#icon-copy"></use></svg>复制结果</button>
+              <button class="button button-outline" id="editAnswers" type="button">调整答案</button>
+              <button class="button button-text" id="retakeQuiz" type="button"><svg><use href="#icon-refresh"></use></svg>重新测试</button>
+            </div>
+          </div>
+          <div class="result-art-wrap reveal reveal-delay">
+            <div class="result-art-glow"></div>
+            <div class="result-cat-svg" id="resultCatSvg" aria-hidden="true"></div>
+            <div class="result-motto"><span aria-hidden="true">“</span><p id="resultMotto">去野，也记得回家给尾巴打个结。</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-content wrap">
+        <section class="result-section dimension-section" aria-labelledby="dimensionTitle">
+          <div class="content-heading">
+            <div><p class="section-kicker">YOUR CAT FREQUENCY</p><h2 id="dimensionTitle">你的猫猫能量分布</h2></div>
+            <p>分数不是能力值，而是你更常从哪一端获得能量。靠近中线，说明你可以更灵活地切换。</p>
+          </div>
+          <div class="score-list" id="scoreList"></div>
+          <div class="balance-note" id="balanceNote"></div>
+        </section>
+
+        <section class="result-section manual-section" aria-labelledby="manualTitle">
+          <div class="content-heading">
+            <div><p class="section-kicker">A FIELD GUIDE TO YOU</p><h2 id="manualTitle">猫格使用说明书</h2></div>
+            <p>从优势、卡点到关系，把这份结果当作理解自己的一个入口，而不是结论。</p>
+          </div>
+          <div class="manual-grid">
+            <article class="manual-card strength-card">
+              <span class="manual-tag">你的发光点</span>
+              <h3>自带的三束光</h3>
+              <ul id="resultStrengths"></ul>
+            </article>
+            <article class="manual-card friction-card">
+              <span class="manual-tag">容易卡住时</span>
+              <h3>不是缺点，是省电提示</h3>
+              <p id="resultFriction"></p>
+            </article>
+            <article class="manual-card relation-card">
+              <span class="manual-tag">和你相处</span>
+              <h3>关系里的舒适距离</h3>
+              <p id="resultRelationship"></p>
+              <div class="recharge-line"><span>充电方式</span><p id="resultRecharge"></p></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="result-section action-section" aria-labelledby="actionTitle">
+          <div class="content-heading">
+            <div><p class="section-kicker">TINY NEXT STEPS</p><h2 id="actionTitle">今天就能试的 3 个小动作</h2></div>
+            <p>不追求改头换面，只给现在的你一点更顺手的生活。</p>
+          </div>
+          <div class="action-grid" id="resultActions"></div>
+        </section>
+
+        <section class="result-section evidence-section" aria-labelledby="evidenceTitle">
+          <button class="evidence-toggle" id="evidenceToggle" type="button" aria-expanded="false" aria-controls="evidencePanel">
+            <span><b>查看结果依据与全部答案</b><small>看看三个维度是怎样由你的选择计算出来的</small></span>
+            <span class="evidence-plus" aria-hidden="true">＋</span>
+          </button>
+          <div class="evidence-panel" id="evidencePanel" hidden>
+            <div class="evidence-formula">
+              <h3>计算方式</h3>
+              <p>每个维度包含 5 道题。每题选择按强度分别记 <b>+2 / +1 / -1 / -2</b>；将 5 题得分相加，分数大于 0 取左端，小于 0 取右端，等于 0 时归入更省电的一端。三个维度的左右端组合成你的类型。</p>
+              <div class="raw-score-grid" id="rawScoreGrid"></div>
+            </div>
+            <div class="answer-review">
+              <h3>你的全部选择</h3>
+              <ol id="answerReviewList"></ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="result-disclaimer" aria-label="结果声明">
+          <span>温柔提醒</span>
+          <p>人格不是固定标签，也会随阶段、情境和关系变化。本测评为原创娱乐型自我探索工具，不构成心理诊断或专业建议；如果你正经历持续困扰，寻求心理咨询师或其他专业人士的帮助会更合适。</p>
+        </section>
+
+        <div class="result-footer-actions">
+          <button class="button button-primary" id="retakeQuizBottom" type="button"><svg><use href="#icon-refresh"></use></svg>重新测试</button>
+          <button class="button button-outline" id="editAnswersBottom" type="button">返回修改答案</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter">
+    <div class="wrap footer-inner">
+      <div class="footer-brand"><svg><use href="#icon-cat-head"></use></svg><div><strong>猫格研究所</strong><p>用猫咪的方式，理解人类自己。</p></div></div>
+      <p class="footer-note">原创自评 · 非专业心理诊断 · 结果仅供自我探索</p>
+      <p class="footer-year">© <span id="year"></span> CAT PERSONALITY LAB</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <noscript>
+    <div class="noscript">这个测评需要开启 JavaScript 才能答题与计算结果。</div>
+  </noscript>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
